@@ -1,0 +1,36 @@
+*{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+body{
+    margin: 0;
+    padding: 0;
+    background-image: url("./images/img1.PNG");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    height: 100vh;  
+}
+.startpage{
+    display: grid;
+    place-items: center;
+    color: #211C1C;
+}
+.startpage h1{
+    font-size: 3rem;
+    font-weight: 700;
+}
+.startpage p{
+    font-size: 1.5rem;
+    font-weight: 450;
+}
+.startpage button{
+    padding: 0.5rem 1rem;
+    border: none;
+    outline: none;
+    border-radius: 0.5rem;
+    background-color: #211C1C;
+    color: #fff;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+}
