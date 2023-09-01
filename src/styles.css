@@ -11,11 +11,15 @@ body{
     height: 100vh;  
 }
 .startpage{
-    display: grid;
-    place-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
     color: #211C1C;
 }
 .startpage h1{
+    margin-bottom: 0;
     font-size: 3rem;
     font-weight: 700;
 }
@@ -23,7 +27,7 @@ body{
     font-size: 1.5rem;
     font-weight: 450;
 }
-.startpage button{
+button{
     padding: 0.5rem 1rem;
     border: none;
     outline: none;
@@ -33,4 +37,19 @@ body{
     font-size: 1rem;
     font-weight: 500;
     cursor: pointer;
+}
+
+.questions{
+    text-align: center;
+}
+@media (max-width: 767px){
+    .startpage h1{
+        font-size: 2rem;
+    }
+    .startpage p{
+        font-size: 1rem;
+    }
+    .startpage button{
+        font-size: 0.8rem;
+    }
 }
