@@ -1,6 +1,21 @@
 import { useState, useEffect } from "react"
+import PropTypes from 'prop-types';
 
-export default function Questions(){
+//decoding the HTML entities in the questions and answers, so that they are displayed correctly
+function decodeHTMLEntities(text) {
+    const entities = {
+        '&quot;': '"',
+        '&amp;': '&',
+        '&lt;': '<',
+        '&gt;': '>',
+        '&#039;': "'",
+        '&ouml;': 'ö',
+        '&auml;': 'ä'
+    };
+    return text.replace(/&[^;]+;/g, match => entities[match] || match);
+}
+
+export default function Questions({quizFinished}){
     const [questions, setQuestions] = useState([]);
 
     useEffect(() =>{
@@ -27,17 +42,22 @@ export default function Questions(){
                     return(
                         //each question has a unique key 
                         <li key={crypto.randomUUID()}>
-                            <h3>{question.question}</h3>
+                            <h3>{decodeHTMLEntities(question.question)}</h3>
                             <div className="answers">
                                 {answers.map(answer =>(
-                                    <div key={crypto.randomUUID()}>{answer}</div>
+                                    <div key={crypto.randomUUID()}
+                                        >{decodeHTMLEntities(answer)}</div>
                                 ))}
                             </div>
                         </li>
                     )
                 })}
             </ol>
-            <button>Check answers</button>
+            <button className={quizFinished? "won-button": "play-button"}>Check answers</button>
         </div>
     )
+}
+Questions.propTypes = {
+    quizFinished: PropTypes.bool.isRequired,
+    setQuizFinished: PropTypes.func.isRequired
 }

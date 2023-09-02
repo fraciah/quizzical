@@ -10,7 +10,7 @@ export default function StartPage(){
         <div className="startpage">
             <h1>Quizzical</h1>
             <p>A fun way to answer random questions</p>
-            <button onClick={handleClick}>Start Quiz</button>
+            <button onClick={handleClick} className="start-button">Start Quiz</button>
         </div>
     )
 }

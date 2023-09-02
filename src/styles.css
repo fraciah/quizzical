@@ -26,7 +26,7 @@ body{
     font-size: 1.5rem;
     font-weight: 450;
 }
-button{
+.start-button{
     padding: 0.7rem 1.2rem;
     border: none;
     outline: none;
@@ -46,6 +46,7 @@ button{
 }
 .questions ol{
     letter-spacing: 1px;
+    list-style: none;
 }
 .answers{
     display: flex;
@@ -63,7 +64,29 @@ button{
     color: #fff;
     transition: all 0.3s ease-in-out;
 }
-.questions button{
+.won-button{
+    padding: 0.7rem 1.2rem;
+    border: none;
+    outline: none;
+    border-radius: 0.5rem;
+    background-color: #211C1C;
+    color: #fff;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    display: block;
+    margin: 0 auto;
+}
+.play-button{
+    padding: 0.7rem 1.2rem;
+    border: none;
+    outline: none;
+    border-radius: 0.5rem;
+    background-color: #918f8f;
+    color: #fff;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: not-allowed;
     display: block;
     margin: 0 auto;
 }
