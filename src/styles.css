@@ -8,7 +8,6 @@ body{
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
-    height: 100vh;  
 }
 .startpage{
     display: flex;
@@ -28,7 +27,7 @@ body{
     font-weight: 450;
 }
 button{
-    padding: 0.5rem 1rem;
+    padding: 0.7rem 1.2rem;
     border: none;
     outline: none;
     border-radius: 0.5rem;
@@ -40,7 +39,33 @@ button{
 }
 
 .questions{
+    padding: 1rem 6rem;
+}
+.questions h1{
     text-align: center;
+}
+.questions ol{
+    letter-spacing: 1px;
+}
+.answers{
+    display: flex;
+    gap: 2rem;
+}
+.answers > div {
+    border: 1px solid #211C1C;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    font-weight: 400;
+    cursor: pointer;
+}
+.answers > div:hover{
+    background-color: #211C1C; /*#5C95F, #F31616*/
+    color: #fff;
+    transition: all 0.3s ease-in-out;
+}
+.questions button{
+    display: block;
+    margin: 0 auto;
 }
 @media (max-width: 767px){
     .startpage h1{
@@ -51,5 +76,13 @@ button{
     }
     .startpage button{
         font-size: 0.8rem;
+    }
+    .questions{
+        padding: 1rem 2rem;
+        width: 100%;
+    }
+    .answers{
+        flex-direction: column; /**/
+        gap: 1rem;
     }
 }
