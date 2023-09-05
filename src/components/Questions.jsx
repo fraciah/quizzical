@@ -26,7 +26,11 @@ export default function Questions({quizFinished}){
             console.log(results);
             setQuestions(results);
         })
-    }, [])
+    }, []);
+
+    function handleClick(){
+        console.log("flipping");
+    }
 
     return(
         <div className="questions">
@@ -34,7 +38,9 @@ export default function Questions({quizFinished}){
             <ol>
                 {questions.map(question =>{
                     //using Fisher-Yates algorithm to shuffle the answers
-                    const answers = [question.correct_answer, ...question.incorrect_answers];
+                    //also adding a property isHeld to each answer
+                    const answers = [question.correct_answer, ...question.incorrect_answers].map(answer => ({answer: answer, 
+                                                                                                             isHeld: false}));
                     for(let i=answers.length-1; i > 0; i--){
                         const j = Math.floor(Math.random() * (i+1));
                         [answers[i], answers[j]] = [answers[j], answers[i]];
@@ -46,7 +52,9 @@ export default function Questions({quizFinished}){
                             <div className="answers">
                                 {answers.map(answer =>(
                                     <div key={crypto.randomUUID()}
-                                        >{decodeHTMLEntities(answer)}</div>
+                                         className={answer.isHeld? "answer-held" : "answer"}
+                                         onClick={handleClick}
+                                        >{decodeHTMLEntities(answer.answer)}{answer.isHeld.toString()}</div>
                                 ))}
                             </div>
                         </li>

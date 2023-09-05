@@ -52,17 +52,26 @@ body{
     display: flex;
     gap: 2rem;
 }
-.answers > div {
+.answer{
     border: 1px solid #211C1C;
     padding: 0.5rem 1rem;
     border-radius: 0.5rem;
     font-weight: 400;
     cursor: pointer;
 }
-.answers > div:hover{
+.answer:hover{
     background-color: #211C1C; /*#5C95F, #F31616*/
     color: #fff;
     transition: all 0.3s ease-in-out;
+}
+.answer-held{
+    border: 1px solid #211C1C;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    font-weight: 400;
+    cursor: pointer;
+    background-color: #211C1C;
+    color: #fff;
 }
 .won-button{
     padding: 0.7rem 1.2rem;
