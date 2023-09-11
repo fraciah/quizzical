@@ -15,7 +15,7 @@ function decodeHTMLEntities(text) {
     return text.replace(/&[^;]+;/g, match => entities[match] || match);
 }
 
-export default function Questions({ quizFinished }) {
+export default function Questions({ quizFinished, setQuizFinished }) {
     const [questions, setQuestions] = useState([]);
 
     useEffect(() => {
@@ -39,6 +39,20 @@ export default function Questions({ quizFinished }) {
                 setQuestions(questionsWithAnswers);
             })
     }, []);
+
+    useEffect(() =>{
+        // check if all questions have a selected answer
+        // 'every' returns true if all questions satisfy the condition inside the callback function
+        // 'some' returns true if at least one answer in a question has 'isHeld' as true
+        const allQstnsAnswered = questions.every(question =>
+            question.answers.some(answer => answer.isHeld));
+        if (allQstnsAnswered){
+            setQuizFinished(true)
+        }
+        else{
+            setQuizFinished(false)
+        }
+    }, [questions, setQuizFinished])
 
     function handleClick(questionIndex, answerIndex) {
         setQuestions(prevQuestions => {
