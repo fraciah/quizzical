@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import PropTypes from 'prop-types';
+// import { useNavigate } from "react-router-dom";
 
 //decoding the HTML entities in the questions and answers, so that they are displayed correctly
 function decodeHTMLEntities(text) {
@@ -16,7 +17,12 @@ function decodeHTMLEntities(text) {
 }
 
 export default function Questions({ quizFinished, setQuizFinished }) {
+    // const navigate = useNavigate();
+
     const [questions, setQuestions] = useState([]);
+    const [checkClicked, setCheckClicked] = useState(false);
+    const [correctAnswers, setCorrectAnswers] = useState(0);
+
 
     useEffect(() => {
         fetch("https://opentdb.com/api.php?amount=5&type=multiple")
@@ -94,7 +100,20 @@ export default function Questions({ quizFinished, setQuizFinished }) {
                     </li>
                 ))}
             </ol>
-            <button className={quizFinished ? "won-button" : "play-button"}>Check answers</button>
+            <h3 className={quizFinished && checkClicked ? "res-display" : "res-hidden"}>You got {correctAnswers}/{questions.length} questions correct</h3>
+            <button className={quizFinished ? "finished-button" : "play-button"}
+                    onClick={() =>{
+                        let correct = 0;
+                        questions.forEach((question) => {
+                            question.answers.forEach((answer) =>{
+                                if(answer.isHeld && answer.answer === question.correct_answer){
+                                    correct ++;
+                                }
+                            });
+                        });
+                        setCorrectAnswers(correct);
+                        setCheckClicked(true)
+                    }}>Check answers</button>
         </div>
     )
 }

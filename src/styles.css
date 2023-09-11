@@ -39,6 +39,10 @@ body{
 }
 
 .questions{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     padding: 1rem 6rem;
 }
 .questions h1{
@@ -73,31 +77,29 @@ body{
     background-color: #211C1C;
     color: #fff;
 }
-.won-button{
+.res-display{
+    font-style: italic;
+    color: #413a3a;
+}
+.res-hidden{
+    display: none; 
+}
+.finished-button, .play-button{
     padding: 0.7rem 1.2rem;
     border: none;
     outline: none;
     border-radius: 0.5rem;
-    background-color: #211C1C;
     color: #fff;
     font-size: 1rem;
     font-weight: 500;
+}
+.finished-button{
     cursor: pointer;
-    display: block;
-    margin: 0 auto;
+    background-color: #211C1C;
 }
 .play-button{
-    padding: 0.7rem 1.2rem;
-    border: none;
-    outline: none;
-    border-radius: 0.5rem;
     background-color: #918f8f;
-    color: #fff;
-    font-size: 1rem;
-    font-weight: 500;
     cursor: not-allowed;
-    display: block;
-    margin: 0 auto;
 }
 @media (max-width: 767px){
     .startpage h1{
