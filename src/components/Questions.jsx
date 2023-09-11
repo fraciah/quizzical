@@ -48,9 +48,9 @@ export default function Questions({ quizFinished }) {
                 if (qIndex === questionIndex) {
                     const newAnswers = question.answers.map((answer, aIndex) => {
                         if (aIndex === answerIndex) {
-                            return { ...answer, isHeld: !answer.isHeld }; // Toggle isHeld for the clicked answer
+                            return { ...answer, isHeld: true }; // set isHeld to true for the clicked answer
                         }
-                        return answer;
+                        return {...answer, isHeld: false}; //set isHeld to false for all other answers
                     });
                     return { ...question, answers: newAnswers };
                 }
