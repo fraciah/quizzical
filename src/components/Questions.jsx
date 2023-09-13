@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import PropTypes from 'prop-types';
-// import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 //decoding the HTML entities in the questions and answers, so that they are displayed correctly
 function decodeHTMLEntities(text) {
@@ -17,11 +17,11 @@ function decodeHTMLEntities(text) {
 }
 
 export default function Questions({ quizFinished, setQuizFinished }) {
-    // const navigate = useNavigate();
+    const navigate = useNavigate();
 
-    const [questions, setQuestions] = useState([]);
-    const [checkClicked, setCheckClicked] = useState(false);
-    const [correctAnswers, setCorrectAnswers] = useState(0);
+    const [questions, setQuestions] = useState([]); //useState to keep track of the questions
+    const [checkClicked, setCheckClicked] = useState(false); //keeping track of whether the check button has been clicked
+    const [correctAnswers, setCorrectAnswers] = useState(0); //useState to keep track of the number of correct answers
 
 
     useEffect(() => {
@@ -79,6 +79,11 @@ export default function Questions({ quizFinished, setQuizFinished }) {
         });
     }
 
+    function handlePlayAgain(){
+        setQuizFinished(false);
+        navigate("/");
+    }
+
     return (
         <div className="questions">
             <h1>Questions</h1>
@@ -101,8 +106,12 @@ export default function Questions({ quizFinished, setQuizFinished }) {
                 ))}
             </ol>
             <h3 className={quizFinished && checkClicked ? "res-display" : "res-hidden"}>You got {correctAnswers}/{questions.length} questions correct</h3>
-            <button className={quizFinished ? "finished-button" : "play-button"}
-                    onClick={() =>{
+            <button 
+                className={quizFinished ? "finished-button" : "play-button"}
+                onClick={() => {
+                    if (quizFinished && checkClicked) {
+                        handlePlayAgain();
+                    } else {
                         let correct = 0;
                         questions.forEach((question) => {
                             question.answers.forEach((answer) =>{
@@ -113,7 +122,11 @@ export default function Questions({ quizFinished, setQuizFinished }) {
                         });
                         setCorrectAnswers(correct);
                         setCheckClicked(true)
-                    }}>Check answers</button>
+                    }
+                }}
+            >
+                {quizFinished && checkClicked ? "Play again" : "Check answers"}
+            </button>
         </div>
     )
 }
