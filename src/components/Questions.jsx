@@ -32,7 +32,7 @@ export default function Questions({ quizFinished, setQuizFinished }) {
                 console.log("Results:",results);
                 // adding an 'isHeld' property to each answer
                 const questionsWithAnswers = results.map(question => {
-                    const answers = [question.correct_answer, ...question.incorrect_answers].map(answer => ({
+                    const answers = shuffleArray([question.correct_answer, ...question.incorrect_answers]).map(answer => ({
                         answer: answer,
                         isHeld: false
                     }));
@@ -59,6 +59,17 @@ export default function Questions({ quizFinished, setQuizFinished }) {
             setQuizFinished(false)
         }
     }, [questions, setQuizFinished])
+
+    // function to shuffle the answers for each question so that the correct answer is not always the first one
+    //Fisher-Yates 
+    function shuffleArray(array) {
+        const shuffledArray = [...array];
+        for (let i = shuffledArray.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [shuffledArray[i], shuffledArray[j]] = [shuffledArray[j], shuffledArray[i]];
+        }
+        return shuffledArray;
+    }
 
     function handleClick(questionIndex, answerIndex) {
         setQuestions(prevQuestions => {
@@ -95,10 +106,16 @@ export default function Questions({ quizFinished, setQuizFinished }) {
                             {question.answers.map((answer, answerIndex) => (
                                 <div
                                     key={answerIndex}
-                                    className={answer.isHeld ? "answer-held" : "answer"}
+                                    className={`
+                                        ${answer.isHeld ? "answer-held" : "answer"}
+                                        ${checkClicked && answer.isHeld && answer.answer === question.correct_answer ? "answer-correct" : ""}
+                                        ${checkClicked && answer.isHeld && answer.answer !== question.correct_answer ? "answer-incorrect" : ""}
+                                        ${checkClicked && answer.answer === question.correct_answer ? "answer-correct" : ""}
+                                        ${checkClicked ? "answer-disabled" : ""}
+                                        `}
                                     onClick={() => handleClick(questionIndex, answerIndex)}
                                 >
-                                    {decodeHTMLEntities(answer.answer)} {answer.isHeld.toString()}
+                                    {decodeHTMLEntities(answer.answer)}
                                 </div>
                             ))}
                         </div>
@@ -121,7 +138,7 @@ export default function Questions({ quizFinished, setQuizFinished }) {
                             });
                         });
                         setCorrectAnswers(correct);
-                        setCheckClicked(true)
+                        setCheckClicked(true);
                     }
                 }}
             >
