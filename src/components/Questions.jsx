@@ -144,6 +144,7 @@ export default function Questions({ quizFinished, setQuizFinished }) {
             >
                 {quizFinished && checkClicked ? "Play again" : "Check answers"}
             </button>
+            <a href="https://github.com/fraciah?tab=repositories" className="tag" target="blank">Crafted with 💖 by Fraciah</a>
         </div>
     )
 }
