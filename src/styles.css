@@ -108,6 +108,7 @@ body{
     color: #fff;
     font-size: 1rem;
     font-weight: 500;
+    margin-bottom: 1rem;
 }
 .finished-button{
     cursor: pointer;
@@ -117,6 +118,15 @@ body{
     background-color: #918f8f;
     pointer-events: none;
 }
+.tag{
+    text-decoration: none;
+    color: #211C1C;
+    font-weight: 500;
+}
+.tag:hover{
+    text-decoration: underline;
+}
+
 @media (max-width: 767px){
     .startpage h1{
         font-size: 2rem;
