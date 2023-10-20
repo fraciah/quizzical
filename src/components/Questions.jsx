@@ -29,7 +29,6 @@ export default function Questions({ quizFinished, setQuizFinished }) {
             .then(response => response.json())
             .then(data => {
                 const { results } = data;
-                console.log("Results:",results);
                 // adding an 'isHeld' property to each answer
                 const questionsWithAnswers = results.map(question => {
                     const answers = shuffleArray([question.correct_answer, ...question.incorrect_answers]).map(answer => ({
